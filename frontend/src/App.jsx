@@ -1,15 +1,14 @@
 import React from 'react';
 import Header from './components/header';
 import { Outlet } from 'react-router-dom';
-import {ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
     <>
+      <Toaster />
       <Header />
       <Outlet />
-      <ToastContainer />
     </>
   )
 }
