@@ -24,11 +24,13 @@ const MailPage = () => {
     to: "",
     subject: "",
     body: "",
+    password: "",
+    emailService: "Gmail",
   });
 
   const handleFormChange = (e) => {
     setMailData({
-      ...maiData,
+      ...mailData,
       [e.target.name]: e.target.value,
     });
   };
@@ -78,10 +80,46 @@ const MailPage = () => {
     toast.success("Template selected successfully");
   };
 
-  function handleSubmitMail(e) {
+  // Send email function
+  const sendEmail = async () => {
+    const emailPassword = prompt("Enter your email password");
+    mailData.password = emailPassword;
+
+    return new Promise(async (resolve, reject) => {
+      try {
+        const response = await fetch('/api/send-mail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(mailData),
+        });
+
+        if (response.ok) {
+          resolve('Email sent successfully');
+        } else {
+          const data = await response.json();
+          reject(`Error: ${data.error}`);
+        }
+      } catch (error) {
+        console.error('Error sending email:', error);
+        reject('Error sending email');
+      }
+    });
+  };
+
+  // Handle submit mail with loading toast
+  const handleSubmitMail = async (e) => {
     e.preventDefault();
-    console.log("Send Mail:", { to, subject, body });
-  }
+    toast.promise(
+      sendEmail(),
+      {
+        loading: 'Sending...',
+        success: (message) => <b>{message}</b>,
+        error: (error) => <b>{error}</b>,
+      }
+    );
+  };
 
   const toggleEmojiPicker = () => {
     setShowEmojiPicker(!showEmojiPicker);
@@ -107,7 +145,7 @@ const MailPage = () => {
                 id="from"
                 type="text"
                 placeholder="From"
-                value={userInfo.email}
+                value={mailData.from}
                 onChange={handleFormChange}
                 required
               />

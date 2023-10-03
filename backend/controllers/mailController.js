@@ -6,7 +6,7 @@ const sendMail = asyncHandler(async (req, res) => {
 
     try {
         const transporter = nodemailer.createTransport({
-            service: emailService, 
+            service: 'Gmail', 
             auth: {
                 user: from,
                 pass: password, 
