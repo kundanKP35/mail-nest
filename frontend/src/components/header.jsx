@@ -55,7 +55,7 @@ const Header = () => {
   return (
     <header className="items-center h-[10vh] px-2 md:px-20 py-4 font-poppins">
       <div className="flex flex-row justify-between">
-        <div>
+        <div className="hidden md:block">
           <Link to="/">
             <h2 className="tracking-widest text-2xl">MAIL NEST</h2>
           </Link>

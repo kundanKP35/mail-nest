@@ -18,10 +18,21 @@ import {
 
 const MailPage = () => {
   const [userTemplates, setUserTemplates] = useState([]);
-  const [from, setFrom] = useState(""); // [TODO] : set from to user email
-  const [to, setTo] = useState("");
-  const [subject, setSubject] = useState("");
-  const [body, setBody] = useState("");
+
+  const [mailData, setMailData] = useState({
+    from: "",
+    to: "",
+    subject: "",
+    body: "",
+  });
+
+  const handleFormChange = (e) => {
+    setMailData({
+      ...maiData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const [selectedTemplate, setSelectedTemplate] = useState(null);
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -50,16 +61,19 @@ const MailPage = () => {
         console.log("Error fetching templates", error);
       }
     };
-    
+
     fetchUserTemplates();
     fecthPreTemplates();
   }, []);
 
   // Handle template selection
   const handleTemplateSelect = (template) => {
-    setSelectedTemplate(template);
-    setSubject(template.subject);
-    setBody(template.body);
+    setSelectedTemplate(template);  
+    setMailData({
+      ...mailData,
+      subject: template.subject,
+      body: template.body,
+    });
 
     toast.success("Template selected successfully");
   };
@@ -74,9 +88,9 @@ const MailPage = () => {
   };
 
   return (
-    <div className="flex flex-row w-full h-[90vh]  gap-x-8 px-4 font-poppins">
+    <div className="flex flex-col md:flex-row w-full h-[90vh]  gap-x-8 px-4 font-poppins">
       {/* form */}
-      <div className="w-1/2 mt-8">
+      <div className="md:w-1/2 mt-8">
         <h1 className="text-2xl font-bold pb-2">Send Mail</h1>
         <form onSubmit={handleSubmitMail}>
           <div className="flex flex-row justify-between">
@@ -89,11 +103,12 @@ const MailPage = () => {
               </label>
               <input
                 className="px-2 placeholder:text-gray-400 focus:outline-gray-300 focus:rounded-full"
+                name="from"
                 id="from"
                 type="text"
                 placeholder="From"
                 value={userInfo.email}
-                onChange={(e) => setFrom(e.target.value)}
+                onChange={handleFormChange}
                 required
               />
             </div>
@@ -106,11 +121,12 @@ const MailPage = () => {
               </label>
               <input
                 className="px-2 placeholder:text-gray-400 focus:outline-gray-300 focus:rounded-full"
+                name="to"
                 id="to"
                 type="text"
                 placeholder="To"
-                value={to}
-                onChange={(e) => setTo(e.target.value)}
+                value={mailData.to}
+                onChange={handleFormChange}
                 required
               />
             </div>
@@ -124,11 +140,12 @@ const MailPage = () => {
             </label> */}
             <input
               className="w-full h-12 bg-slate-100 rounded-md text-center"
+              name="subject"
               id="subject"
               type="text"
               placeholder="Subject"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
+              value={mailData.subject}
+              onChange={handleFormChange}
             />
           </div>
           <div className="mb-4">
@@ -140,11 +157,12 @@ const MailPage = () => {
             </label>
             <textarea
               className="h-60 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              name="body"
               id="body"
               type="text"
               placeholder="Body"
-              value={body}
-              onChange={(e) => setBody(e.target.value)}
+              value={mailData.body}
+              onChange={handleFormChange}
             />
           </div>
           <div className="relative">
@@ -166,7 +184,7 @@ const MailPage = () => {
           </div>
         </form>
       </div>
-      <div className="flex flex-col w-1/2 mt-8 gap-x-2 gap-y-8">
+      <div className="flex flex-col md:w-1/2 mt-8 gap-x-2 gap-y-8">
         {/* userTemplates */}
         <div>
           {userTemplates && (
@@ -181,8 +199,11 @@ const MailPage = () => {
                           <h2>
                             <AccordionButton>
                               <Box as="span" flex="1" textAlign="left">
-                                {template.name}<br/>
-                                <span className="text-sm text-gray-400">{template.description}</span>
+                                {template.name}
+                                <br />
+                                <span className="text-sm text-gray-400">
+                                  {template.description}
+                                </span>
                               </Box>
                               <AccordionIcon />
                             </AccordionButton>
