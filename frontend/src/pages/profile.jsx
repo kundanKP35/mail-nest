@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import FormContainer from '../components/form_container';
 import { useUpdateProfileMutation } from "../slice/usersApiSlice";
 import {setCredentials} from '../slice/loginSlice';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 const Profile = () => {
     const [name, setName] = useState('');
