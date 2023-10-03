@@ -38,10 +38,6 @@ const Header = () => {
 
   const navLinks = [
     {
-      name: "Home",
-      path: "/",
-    },
-    {
       name: "About",
       path: "/about",
     },
@@ -53,7 +49,7 @@ const Header = () => {
 
   return (
   
-    <header className="items-center h-[10vh] px-2 md:px-20 py-4 font-poppins">
+    <header className="items-center px-2 md:px-20 py-4 font-poppins">
       <div className="flex flex-row justify-between">
         <div>
           <Link to="/">
@@ -111,7 +107,7 @@ const Header = () => {
                     <li className="">
                       <Link
                         to="/login"
-                        className="items-center text-sm rounded-full px-3 py-2 hover:bg-slate-100"
+                        className="items-center text-sm rounded-full px-3 py-2"
                       >
                         {/* <FaSignInAlt /> Sign In */}
                         Sign In
