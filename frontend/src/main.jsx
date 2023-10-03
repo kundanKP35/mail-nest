@@ -19,6 +19,8 @@ import RegisterPage from './pages/register.jsx';
 import MailPage from './pages/mail.jsx';
 import store from './store.js';
 
+import { ChakraProvider } from '@chakra-ui/react'
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -38,7 +40,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <React.StrictMode>
+    <ChakraProvider>
       <RouterProvider router={router} />
+    </ChakraProvider>
     </React.StrictMode>
   </Provider>
 )

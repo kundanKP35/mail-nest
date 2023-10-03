@@ -30,11 +30,12 @@ const getUserTemplates = asyncHandler(async (req, res) => {
 });
 
 const createTemplate = asyncHandler(async (req, res) => {
-    const {name, subject, body} = req.body;
+    const {name, description , subject, body} = req.body;
     const userId = req.user._id;
     try {
         const template = await Template.create({
             name,
+            description ,
             subject,
             body,
             createdBy: userId,

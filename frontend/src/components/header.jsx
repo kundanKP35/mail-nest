@@ -6,6 +6,7 @@ import {
   FaCaretDown,
   FaUserCircle,
 } from "react-icons/fa";
+import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCredentials } from "../slice/loginSlice";
 import { useLogoutMutation } from "../slice/usersApiSlice";
@@ -52,7 +53,6 @@ const Header = () => {
   ];
 
   return (
-  
     <header className="items-center h-[10vh] px-2 md:px-20 py-4 font-poppins">
       <div className="flex flex-row justify-between">
         <div>
@@ -64,7 +64,7 @@ const Header = () => {
         <div>
           <ul className="flex flex-row justify-between gap-3">
             {navLinks.map((link) => (
-              <li key={link.name}>
+              <li key={link.name} className="hover:font-bold transition-all">
                 <Link to={link.path}>{link.name}</Link>
               </li>
             ))}
@@ -88,13 +88,31 @@ const Header = () => {
                   <div className="absolute top-12 right-4 bg-white text-black shadow-md py-2 rounded-md">
                     <ul className="list-none p-0 m-0">
                       <li className="cursor-pointer hover:bg-gray-200 py-1 px-4">
-                        <Link to="/profile" className="flex items-center gap-2">
+                        <Link
+                          to="/dashboard"
+                          className="flex items-center gap-2"
+                          onClick={toggleDropdown}
+                        >
+                          <MdOutlineSpaceDashboard />
+                          Dashboard
+                        </Link>
+                      </li>
+                      <li className="cursor-pointer hover:bg-gray-200 py-1 px-4">
+                        <Link
+                          to="/profile"
+                          className="flex items-center gap-2"
+                          onClick={toggleDropdown}
+                        >
                           <FaUserCircle />
                           Profile
                         </Link>
                       </li>
+
                       <li
-                        onClick={handleLogout}
+                        onClick={() => {
+                          handleLogout();
+                          toggleDropdown();
+                        }}
                         className="cursor-pointer hover:bg-gray-200 py-1 px-4 flex items-center gap-2"
                       >
                         <FaSignOutAlt />
