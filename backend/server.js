@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
 import templateRoutes from './routes/templateRoutes.js';
+import mailRoutes from './routes/mailRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDatabase from './config/database.js';
 import cookieParser from 'cookie-parser';
@@ -21,6 +22,8 @@ app.use(cookieParser());
 app.use('/api/users',userRoutes);
 
 app.use('/api/mail',templateRoutes);
+
+app.use('/api/',mailRoutes);
 
 app.get('/',(req,res)=>{
     res.send('Server is ready');
