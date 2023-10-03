@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
-import {useSelector, useDispatch} from 'react-redux';
-import FormContainer from '../components/form_container';
-import { useUpdateProfileMutation } from "../slice/usersApiSlice";
-import {setCredentials} from '../slice/loginSlice';
+import { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCredentials } from '../slice/loginSlice';
+import { useUpdateProfileMutation } from "../slice/usersApiSlice";
 
 const Profile = () => {
     const [name, setName] = useState('');
@@ -44,7 +43,7 @@ const Profile = () => {
     };
 
     return (
-        <FormContainer>
+        <div className="w-1/3 m-auto md:mt-6 font-poppins">
             <h1 className="text-2xl font-bold mb-6">Update Profile</h1>
 
             <form onSubmit={submitHandler}>
@@ -55,7 +54,7 @@ const Profile = () => {
                         id="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full border rounded-md px-3 py-2 mt-1"
+                        className="w-full border px-3 py-2 mt-1"
                     />
                 </div>
 
@@ -66,7 +65,7 @@ const Profile = () => {
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border rounded-md px-3 py-2 mt-1"
+                        className="w-full border px-3 py-2 mt-1"
                     />
                 </div>
 
@@ -77,7 +76,7 @@ const Profile = () => {
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full border rounded-md px-3 py-2 mt-1"
+                        className="w-full border px-3 py-2 mt-1"
                     />
                 </div>
 
@@ -88,18 +87,18 @@ const Profile = () => {
                         id="confirmPassword"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-full border rounded-md px-3 py-2 mt-1"
+                        className="w-full border px-3 py-2 mt-1"
                     />
                 </div>
 
                 <button
                     type="submit"
-                    className="w-full bg-[#ff3f6c] text-white font-semibold py-2 rounded-md hover:bg-[#f15075]"
+                    className="w-full mt-4  bg-black text-white font-semibold py-2 rounded-md hover:bg-gray-900 transition-all"
                 >
                     Update
                 </button>
             </form>
-        </FormContainer>
+            </div>
     )
 }
 

@@ -1,22 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from 'react-router-dom';
-import store from './store.js';
-import { Provider } from 'react-redux';
+import App from './App.jsx';
 import PrivateRoute from './components/private_route.jsx';
+import './index.css';
+import About from './pages/about.jsx';
+import Contact from './pages/contact.jsx';
 import Home from './pages/home.jsx';
 import LoginPage from './pages/login.jsx';
-import RegisterPage from './pages/register.jsx';
 import Profile from './pages/profile.jsx';
-import MailPage from './pages/mail.jsx';
-import About from './pages/about.jsx';
+import RegisterPage from './pages/register.jsx';
+import store from './store.js';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,9 +25,9 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
-        <Route path="/mail" element={<MailPage />} />
       </Route>
     </Route>
   )
