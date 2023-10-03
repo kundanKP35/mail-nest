@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { FcGoogle } from "react-icons/fc";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { banner } from "../assets/index";
-import { setCredentials } from "../slice/loginSlice";
+import { useSelector, useDispatch } from "react-redux";
+import FormContainer from "../components/form_container";
 import { useLoginMutation } from "../slice/usersApiSlice";
+import { setCredentials } from "../slice/loginSlice";
+import toast from "react-hot-toast";
+import { banner } from "../assets/index";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ const LoginPage = () => {
     try {
       const response = await loginApiCall({ email, password }).unwrap(); // Making request to the bakend
       dispatch(setCredentials({ ...response }));
-      toast.success(`Welcome Back ${response.name.split(" ")[0]} !`);
+      toast.success("Login Successful");
       navigate("/");
     } catch (error) {
       toast.error(error?.data?.message);
@@ -37,17 +38,17 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-row h-[90vh] font-poppins">
-      <div className="w-[50%] hidden md:block px-2">
+    <div className="flex flex-row">
+      <div className="w-[50%] hidden md:block p-2">
         <img
           src={banner}
           alt="Hero Image"
-          className="w-full object-cover h-[88vh] rounded-2xl "
+          className="w-full object-cover h-[88vh] "
           style={{ margin: 0, padding: 0 }}
         />
       </div>
       <div className="md:w-[50%] my-auto md:px-20">
-        <h2 className="text-3xl  pb-2 text-left">
+        <h2 className="text-3xl font-poppins pb-2 text-left">
           Welcome to MailNest,
           <br />
           Sign In to continue
@@ -66,7 +67,7 @@ const LoginPage = () => {
           </span>
         </div>
         <form onSubmit={submitHandler}>
-          <label htmlFor="email" className="text-xs ">
+          <label htmlFor="email" className="text-xs font-poppins">
             Email
           </label>
           <input
@@ -88,7 +89,7 @@ const LoginPage = () => {
           />
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 hover:bg-gray-900 mt-4 transition-all"
+            className="w-full bg-black text-white font-semibold py-2 hover:bg-gray-900 mt-4 transition-all"
           >
             Sign In
           </button>
