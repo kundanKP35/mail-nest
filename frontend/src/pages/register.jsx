@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import FormContainer from "../components/form_container";
 import { useRegisterMutation } from "../slice/usersApiSlice";
 import { setCredentials } from "../slice/loginSlice";
 import toast from "react-hot-toast";
@@ -49,12 +48,12 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex flex-row">
-      <div className="w-[50%] hidden md:block p-2">
+    <div className="flex flex-row h-[90vh] font-poppins">
+      <div className="w-[50%] hidden md:block px-2">
         <img
           src={banner}
           alt="Hero Image"
-          className="w-full object-cover h-[88vh] "
+          className="w-full object-cover h-[88vh] rounded-2xl"
           style={{ margin: 0, padding: 0 }}
         />
       </div>
@@ -118,7 +117,7 @@ const RegisterPage = () => {
           />
           <button
             type="submit"
-            className="w-full bg-black text-white font-semibold py-2 hover:bg-gray-900 mt-4 transition-all"
+            className="w-full bg-black text-white py-2 hover:bg-gray-900 mt-4 transition-all"
           >
             Sign Up
           </button>

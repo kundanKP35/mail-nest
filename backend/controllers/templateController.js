@@ -46,26 +46,5 @@ const createTemplate = asyncHandler(async (req, res) => {
     }
 });
 
-const deleteTemplate = asyncHandler(async (req, res) => {
-    const userId = req.user._id;
-    const templateId = req.params.id;
-    try {
-        const template = await Template.findOneAndDelete({
-            _id: templateId,
-            createdBy: userId,
-            isCustom: true, // Ensure it's a custom template
-        });
-
-        if (template) {
-            res.json({ message: 'Custom template removed successfully' });
-        } else {
-            res.status(404).json({ message: 'Custom template not found or you do not have permission to delete' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Error deleting custom template' });
-    }
-});
-
-
-export {getAllTemplates, getTemplateById, getUserTemplates, createTemplate, deleteTemplate};
+export {getAllTemplates, getTemplateById, getUserTemplates, createTemplate};
 
