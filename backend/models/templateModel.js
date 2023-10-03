@@ -5,9 +5,6 @@ const templateSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    description: {
-        type: String,
-    },
     subject: {
         type: String,
         required: true,
