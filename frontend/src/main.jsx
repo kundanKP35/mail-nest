@@ -16,6 +16,7 @@ import Home from './pages/home.jsx';
 import LoginPage from './pages/login.jsx';
 import Profile from './pages/profile.jsx';
 import RegisterPage from './pages/register.jsx';
+import MailPage from './pages/mail.jsx';
 import store from './store.js';
 
 const router = createBrowserRouter(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="/contact" element={<Contact />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<MailPage />} />
       </Route>
     </Route>
   )
