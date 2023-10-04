@@ -29,7 +29,9 @@ const LoginPage = () => {
     try {
       const response = await loginApiCall({ email, password }).unwrap(); // Making request to the bakend
       dispatch(setCredentials({ ...response }));
-      toast.success(`Welcome Back ${response.name.split(" ")[0]} !`);
+      toast(`Welcome Back ${response.name.split(" ")[0]} !`, {
+        icon: '🙋',
+      });
       navigate("/");
     } catch (error) {
       toast.error(error?.data?.message);
