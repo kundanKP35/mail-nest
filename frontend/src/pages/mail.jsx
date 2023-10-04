@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useGetUserTemplatesMutation } from "../slice/templateApiSlices";
 import { useGetAllTemplateMutation } from "../slice/templateApiSlices";
 import { useSelector } from "react-redux";
@@ -6,6 +7,9 @@ import toast from "react-hot-toast";
 import EmojiPicker from "emoji-picker-react";
 import { GrAttachment } from "react-icons/gr";
 import { BsEmojiSmile } from "react-icons/bs";
+import { Alert, AlertIcon } from "@chakra-ui/react";
+import { FiExternalLink } from "react-icons/fi";
+
 
 import {
   Accordion,
@@ -70,7 +74,7 @@ const MailPage = () => {
 
   // Handle template selection
   const handleTemplateSelect = (template) => {
-    setSelectedTemplate(template);  
+    setSelectedTemplate(template);
     setMailData({
       ...mailData,
       subject: template.subject,
@@ -87,23 +91,23 @@ const MailPage = () => {
 
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch('/api/send-mail', {
-          method: 'POST',
+        const response = await fetch("/api/send-mail", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(mailData),
         });
 
         if (response.ok) {
-          resolve('Email sent successfully');
+          resolve("Email sent successfully");
         } else {
           const data = await response.json();
           reject(`Error: ${data.error}`);
         }
       } catch (error) {
-        console.error('Error sending email:', error);
-        reject('Error sending email');
+        console.error("Error sending email:", error);
+        reject("Error sending email");
       }
     });
   };
@@ -111,14 +115,11 @@ const MailPage = () => {
   // Handle submit mail with loading toast
   const handleSubmitMail = async (e) => {
     e.preventDefault();
-    toast.promise(
-      sendEmail(),
-      {
-        loading: 'Sending...',
-        success: (message) => <b>{message}</b>,
-        error: (error) => <b>{error}</b>,
-      }
-    );
+    toast.promise(sendEmail(), {
+      loading: "Sending...",
+      success: (message) => <b>{message}</b>,
+      error: (error) => <b>{error}</b>,
+    });
   };
 
   const toggleEmojiPicker = () => {
@@ -130,8 +131,9 @@ const MailPage = () => {
       {/* form */}
       <div className="md:w-1/2 mt-8">
         <h1 className="text-2xl font-bold pb-2">Send Mail</h1>
+        
         <form onSubmit={handleSubmitMail}>
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-row justify-between pt-2">
             <div className="mb-4 flex flex-row items-center justify-center">
               <label
                 className="block text-gray-700 text-sm font-bold mr-2"
@@ -223,6 +225,12 @@ const MailPage = () => {
         </form>
       </div>
       <div className="flex flex-col md:w-1/2 mt-8 gap-x-2 gap-y-8">
+      <Alert status="warning" className="rounded-xl">
+          <AlertIcon />
+          Since May 30, 2022, Google no longer supports less secure apps. Follow the link to get started with your own app password .
+          Don't worry, it's easy and one-time setup !<br />
+          <Link to="/instructions"><FiExternalLink/></Link>
+        </Alert>
         {/* userTemplates */}
         <div>
           {userTemplates && (
