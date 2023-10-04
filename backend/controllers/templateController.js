@@ -1,28 +1,19 @@
-import asyncHandler from 'express-async-handler';
-import Template from '../models/templateModel.js';
+import asyncHandler from "express-async-handler";
+import Template from "../models/templateModel.js";
 
 const getAllTemplates = asyncHandler(async (req, res) => {
-   try {
-    const templates = await Template.find({isCustom: false});
-        res.json(templates);
-   } catch (error) {
-        throw new Error(error);
-   }
-});
-
-const getTemplateById = asyncHandler(async (req, res) => {
     try {
-        const template = await Template.findById(req.params.id);
-        res.json(template);
+        const templates = await Template.find({ isCustom: false });
+        res.json(templates);
     } catch (error) {
         throw new Error(error);
-    }       
+    }
 });
 
 const getUserTemplates = asyncHandler(async (req, res) => {
     const userId = req.user._id;
     try {
-        const templates = await Template.find({createdBy: userId});
+        const templates = await Template.find({ createdBy: userId });
         res.json(templates);
     } catch (error) {
         throw new Error(error);
@@ -30,12 +21,12 @@ const getUserTemplates = asyncHandler(async (req, res) => {
 });
 
 const createTemplate = asyncHandler(async (req, res) => {
-    const {name, description , subject, body} = req.body;
+    const { name, description, subject, body } = req.body;
     const userId = req.user._id;
     try {
         const template = await Template.create({
             name,
-            description ,
+            description,
             subject,
             body,
             createdBy: userId,
@@ -47,5 +38,14 @@ const createTemplate = asyncHandler(async (req, res) => {
     }
 });
 
-export {getAllTemplates, getTemplateById, getUserTemplates, createTemplate};
+const deleteTemplate = asyncHandler(async (req, res) => {
+    const templateId = req.params.id;
+    try {
+        await Template.findByIdAndDelete({ _id: templateId });
+        res.json(Template);
+    } catch (error) {
+        throw new Error(error);
+    }
+});
 
+export { getAllTemplates, getUserTemplates, createTemplate, deleteTemplate };

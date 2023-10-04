@@ -25,9 +25,10 @@ export const templateApiSlice = apiSlice.injectEndpoints({
             })
         }),
         deleteTemplate: builder.mutation({
-            query: () => ({
-                url: `${TEMPLATE_URL}/templates/me/delete`,
+            query: (templateId) => ({
+                url: `${TEMPLATE_URL}/templates/${templateId}`,
                 method: 'DELETE',
+                body: templateId
             })
         }),
     })
