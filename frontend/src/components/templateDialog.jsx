@@ -28,7 +28,6 @@ const TemplateDialog = ({ isOpen, onClose, onSaveTemplate, mailData }) => {
       body: mailData.body,
     });
   }, [mailData]);
-  
 
   const handleInputChange = (e) => {
     setTemplateInfo({
@@ -39,13 +38,12 @@ const TemplateDialog = ({ isOpen, onClose, onSaveTemplate, mailData }) => {
 
   const handleSaveTemplate = () => {
     onSaveTemplate(templateInfo);
-    onClose();
   };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent maxH="800px" maxW="800px" className="font-poppins">
         <ModalHeader>Save as Template</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
@@ -71,9 +69,12 @@ const TemplateDialog = ({ isOpen, onClose, onSaveTemplate, mailData }) => {
 
           <FormControl mt={4} isRequired>
             <FormLabel>Subject</FormLabel>
-            <Input
-              placeholder="Enter Subject"
+            <input
+              className="w-full h-12 bg-slate-100 rounded-md text-center"
               name="subject"
+              id="subject"
+              type="text"
+              placeholder="Subject"
               value={templateInfo.subject}
               onChange={handleInputChange}
             />
@@ -81,7 +82,8 @@ const TemplateDialog = ({ isOpen, onClose, onSaveTemplate, mailData }) => {
 
           <FormControl mt={4} isRequired>
             <FormLabel>Body</FormLabel>
-            <Input
+            <textarea
+              className="w-full border-2 border-gray-300 rounded-md p-2 h-28"
               placeholder="Enter Body"
               name="body"
               value={templateInfo.body}

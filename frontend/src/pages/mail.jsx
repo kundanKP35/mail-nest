@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
-import { useGetAllTemplateMutation,useGetUserTemplatesMutation, useCreateTemplateMutation ,useDeleteTemplateMutation } from "../slice/templateApiSlices";
+import { Link } from "react-router-dom";
+import {
+  useCreateTemplateMutation,
+  useDeleteTemplateMutation,
+  useGetAllTemplateMutation,
+  useGetUserTemplatesMutation,
+} from "../slice/templateApiSlices";
 
-import { useSelector } from "react-redux";
-import toast from "react-hot-toast";
 import EmojiPicker from "emoji-picker-react";
-import { GrAttachment } from "react-icons/gr";
+import toast from "react-hot-toast";
+import { AiFillDelete } from "react-icons/ai";
 import { BsEmojiSmile } from "react-icons/bs";
+import { GrAttachment } from "react-icons/gr";
+import { MdOutlineBookmarkAdd } from "react-icons/md";
+import { useSelector } from "react-redux";
 
-import { useDisclosure } from "@chakra-ui/react";
-import TemplateDialog from "../components/templateDialog";
-import { Alert, AlertIcon } from "@chakra-ui/react";
+import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/react";
 import { FiExternalLink } from "react-icons/fi";
-
+import TemplateDialog from "../components/templateDialog";
 
 import {
   Accordion,
-  AccordionItem,
   AccordionButton,
-  AccordionPanel,
   AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
 } from "@chakra-ui/react";
 
@@ -135,15 +140,21 @@ const MailPage = () => {
 
   const handleOpenTemplate = (event) => {
     onOpen();
-  }
+  };
 
-  const handleSaveTemplate = async(templateInfo) => {
-    if (!templateInfo.name || !templateInfo.description || !templateInfo.subject || !templateInfo.body) {
+  const handleSaveTemplate = async (templateInfo) => {
+    if (
+      !templateInfo.name ||
+      !templateInfo.description ||
+      !templateInfo.subject ||
+      !templateInfo.body
+    ) {
       toast.error("Please fill out all fields");
     } else {
       try {
         await createTemplateApi(templateInfo);
         toast.success("Template saved successfully");
+        onClose();
         fetchUserTemplates();
       } catch (error) {
         toast.error("Error saving template");
@@ -151,23 +162,22 @@ const MailPage = () => {
     }
   };
 
-  const handleDeleteTemplate = async(templateId) => {
-      try {
-        await deleteTemplateApi(templateId);
-        toast.success("Template deleted successfully");
-        fetchUserTemplates();
-      } catch (error) {
-        toast.error(error);
-      }
-  }
-  
+  const handleDeleteTemplate = async (templateId) => {
+    try {
+      await deleteTemplateApi(templateId);
+      toast.success("Template deleted successfully");
+      fetchUserTemplates();
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   return (
     <div className="flex flex-col md:flex-row w-full h-[90vh]  gap-x-8 px-4 font-poppins">
       {/* form */}
       <div className="md:w-1/2 mt-8">
         <h1 className="text-2xl font-bold pb-2">Send Mail</h1>
-        
+
         <form onSubmit={handleSubmitMail}>
           <div className="flex flex-row justify-between pt-2">
             <div className="mb-4 flex flex-row items-center justify-center">
@@ -208,12 +218,6 @@ const MailPage = () => {
             </div>
           </div>
           <div className="mb-4">
-            {/* <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="subject"
-            >
-              Subject
-            </label> */}
             <input
               className="w-full h-12 bg-slate-100 rounded-md text-center"
               name="subject"
@@ -242,9 +246,18 @@ const MailPage = () => {
             />
           </div>
           <div className="relative">
-            <div className="flex items-center justify-end gap-x-3">
+            <div className="flex items-center justify-between gap-x-3">
+              <div>
+                <button
+                  className="bg-black hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline flex flex-row items-center gap-2"
+                  onClick={handleOpenTemplate}
+                >
+                  Save Template <MdOutlineBookmarkAdd />
+                </button>
+              </div>
+              <div className="flex flex-row justify-end items-center gap-3">
               <GrAttachment />
-              <BsEmojiSmile onClick={toggleEmojiPicker} />{" "}
+              <BsEmojiSmile onClick={toggleEmojiPicker} />
               {showEmojiPicker && (
                 <div className="absolute top-0 right-0 mt-10">
                   <EmojiPicker />
@@ -256,24 +269,27 @@ const MailPage = () => {
               >
                 Send
               </button>
-
+              </div>
             </div>
           </div>
         </form>
-        <button
-          className="bg-black hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          onClick={handleOpenTemplate}
-        >
-          Save as Template
-        </button>
-        <TemplateDialog isOpen={isOpen} onClose={onClose} onSaveTemplate={handleSaveTemplate} mailData={mailData} />
+
+        <TemplateDialog
+          isOpen={isOpen}
+          onClose={onClose}
+          onSaveTemplate={handleSaveTemplate}
+          mailData={mailData}
+        />
       </div>
       <div className="flex flex-col md:w-1/2 mt-8 gap-x-2 gap-y-8">
-      <Alert status="warning" className="rounded-xl">
+        <Alert status="warning" className="rounded-xl">
           <AlertIcon />
-          Since May 30, 2022, Google no longer supports less secure apps. Follow the link to get started with your own app password .
-          Don't worry, it's easy and one-time setup !<br />
-          <Link to="/instructions"><FiExternalLink/></Link>
+          Since May 30, 2022, Google no longer supports less secure apps. Follow
+          the link to get started with your own app password . Don't worry, it's
+          easy and one-time setup !<br />
+          <Link to="/instructions">
+            <FiExternalLink />
+          </Link>
         </Alert>
         {/* userTemplates */}
         <div>
@@ -299,14 +315,21 @@ const MailPage = () => {
                             </AccordionButton>
                           </h2>
                           <AccordionPanel pb={4}>
-                            <p>{template.body}</p>
-                            <button
-                              className="bg-black  hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                              onClick={() => handleTemplateSelect(template)}
-                            >
-                              Use
-                            </button>
-                            <button onClick={() => handleDeleteTemplate(template._id)}>Delete Template</button>
+                            <pre>{`${template.body}`}</pre>
+                            <div className="flex flex-row justify-between pt-2">
+                              <button
+                                className="bg-black  hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                onClick={() => handleTemplateSelect(template)}
+                              >
+                                Use
+                              </button>
+                              <AiFillDelete
+                                className="text-2xl hover:text-red-500 hover:cursor-pointer"
+                                onClick={() =>
+                                  handleDeleteTemplate(template._id)
+                                }
+                              />
+                            </div>
                           </AccordionPanel>
                         </AccordionItem>
                       ))}
@@ -345,7 +368,7 @@ const MailPage = () => {
                             </AccordionButton>
                           </h2>
                           <AccordionPanel pb={4}>
-                            <p>{template.body}</p>
+                            <pre>{`${template.body}`}</pre>
                             <button
                               className="bg-black  hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                               onClick={() => handleTemplateSelect(template)}

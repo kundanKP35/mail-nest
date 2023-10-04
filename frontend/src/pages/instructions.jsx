@@ -95,7 +95,7 @@ export default function HorizontalLinearStepper() {
   return (
     <div className="w-1/2 h-[90vh] mx-auto font-poppins">
       <Box sx={{ width: "100%" }}>
-        <Stepper activeStep={activeStep}>
+        <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((step, index) => (
             <Step key={index}>
               <StepLabel>{step.title}</StepLabel>
