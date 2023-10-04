@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useGetUserTemplatesMutation } from "../slice/templateApiSlices";
-import { useGetAllTemplateMutation } from "../slice/templateApiSlices";
+import {Link} from "react-router-dom";
+import { useGetAllTemplateMutation,useGetUserTemplatesMutation, useCreateTemplateMutation ,useDeleteTemplateMutation } from "../slice/templateApiSlices";
+
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import EmojiPicker from "emoji-picker-react";
 import { GrAttachment } from "react-icons/gr";
 import { BsEmojiSmile } from "react-icons/bs";
+
+import { useDisclosure } from "@chakra-ui/react";
+import TemplateDialog from "../components/templateDialog";
 import { Alert, AlertIcon } from "@chakra-ui/react";
 import { FiExternalLink } from "react-icons/fi";
 
@@ -22,6 +25,8 @@ import {
 
 const MailPage = () => {
   const [userTemplates, setUserTemplates] = useState([]);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [mailData, setMailData] = useState({
     from: "",
@@ -47,27 +52,29 @@ const MailPage = () => {
 
   const [getUserTemplatesApi, { error }] = useGetUserTemplatesMutation();
   const [getAllTemplatesApi] = useGetAllTemplateMutation();
+  const [createTemplateApi] = useCreateTemplateMutation();
+  const [deleteTemplateApi] = useDeleteTemplateMutation();
 
   const { userInfo } = useSelector((state) => state.login);
 
-  useEffect(() => {
-    const fetchUserTemplates = async () => {
-      try {
-        const response = await getUserTemplatesApi().unwrap();
-        setUserTemplates(response);
-      } catch (error) {
-        console.log("Error fetching user templates", error);
-      }
-    };
-    const fecthPreTemplates = async () => {
-      try {
-        const preTemplates = await getAllTemplatesApi().unwrap();
-        setPreTemplates(preTemplates);
-      } catch (error) {
-        console.log("Error fetching templates", error);
-      }
-    };
+  const fetchUserTemplates = async () => {
+    try {
+      const response = await getUserTemplatesApi().unwrap();
+      setUserTemplates(response);
+    } catch (error) {
+      console.log("Error fetching user templates", error);
+    }
+  };
+  const fecthPreTemplates = async () => {
+    try {
+      const preTemplates = await getAllTemplatesApi().unwrap();
+      setPreTemplates(preTemplates);
+    } catch (error) {
+      console.log("Error fetching templates", error);
+    }
+  };
 
+  useEffect(() => {
     fetchUserTemplates();
     fecthPreTemplates();
   }, []);
@@ -125,6 +132,35 @@ const MailPage = () => {
   const toggleEmojiPicker = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
+
+  const handleOpenTemplate = (event) => {
+    onOpen();
+  }
+
+  const handleSaveTemplate = async(templateInfo) => {
+    if (!templateInfo.name || !templateInfo.description || !templateInfo.subject || !templateInfo.body) {
+      toast.error("Please fill out all fields");
+    } else {
+      try {
+        await createTemplateApi(templateInfo);
+        toast.success("Template saved successfully");
+        fetchUserTemplates();
+      } catch (error) {
+        toast.error("Error saving template");
+      }
+    }
+  };
+
+  const handleDeleteTemplate = async(templateId) => {
+      try {
+        await deleteTemplateApi(templateId);
+        toast.success("Template deleted successfully");
+        fetchUserTemplates();
+      } catch (error) {
+        toast.error(error);
+      }
+  }
+  
 
   return (
     <div className="flex flex-col md:flex-row w-full h-[90vh]  gap-x-8 px-4 font-poppins">
@@ -220,9 +256,17 @@ const MailPage = () => {
               >
                 Send
               </button>
+
             </div>
           </div>
         </form>
+        <button
+          className="bg-black hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          onClick={handleOpenTemplate}
+        >
+          Save as Template
+        </button>
+        <TemplateDialog isOpen={isOpen} onClose={onClose} onSaveTemplate={handleSaveTemplate} mailData={mailData} />
       </div>
       <div className="flex flex-col md:w-1/2 mt-8 gap-x-2 gap-y-8">
       <Alert status="warning" className="rounded-xl">
@@ -240,8 +284,8 @@ const MailPage = () => {
                 {userTemplates && userTemplates.length !== 0 ? (
                   <div>
                     <Accordion allowToggle>
-                      {userTemplates.map((template, index) => (
-                        <AccordionItem key={index}>
+                      {userTemplates.map((template) => (
+                        <AccordionItem key={template._id}>
                           <h2>
                             <AccordionButton>
                               <Box as="span" flex="1" textAlign="left">
@@ -262,6 +306,7 @@ const MailPage = () => {
                             >
                               Use
                             </button>
+                            <button onClick={() => handleDeleteTemplate(template._id)}>Delete Template</button>
                           </AccordionPanel>
                         </AccordionItem>
                       ))}
