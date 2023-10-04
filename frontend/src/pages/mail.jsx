@@ -7,6 +7,9 @@ import {
   useGetUserTemplatesMutation,
 } from "../slice/templateApiSlices";
 
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+
 import EmojiPicker from "emoji-picker-react";
 import toast from "react-hot-toast";
 import { AiFillDelete } from "react-icons/ai";
@@ -256,19 +259,19 @@ const MailPage = () => {
                 </div>
               </div>
               <div className="flex flex-row justify-end items-center gap-3">
-              <GrAttachment />
-              <BsEmojiSmile onClick={toggleEmojiPicker} />
-              {showEmojiPicker && (
-                <div className="absolute top-0 right-0 mt-10">
-                  <EmojiPicker />
-                </div>
-              )}
-              <button
-                className="bg-black hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit"
-              >
-                Send
-              </button>
+                <GrAttachment />
+                <BsEmojiSmile onClick={toggleEmojiPicker} />
+                {showEmojiPicker && (
+                  <div className="absolute top-0 right-0 mt-10">
+                    <EmojiPicker />
+                  </div>
+                )}
+                <button
+                  className="bg-black hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Send
+                </button>
               </div>
             </div>
           </div>
@@ -315,7 +318,9 @@ const MailPage = () => {
                             </AccordionButton>
                           </h2>
                           <AccordionPanel pb={4}>
-                            <pre>{`${template.body}`}</pre>
+                            <div className="border border-gray-200 p-4 rounded-xl">
+                              <pre>{`${template.body}`}</pre>
+                            </div>
                             <div className="flex flex-row justify-between pt-2">
                               <button
                                 className="bg-black  hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -323,12 +328,17 @@ const MailPage = () => {
                               >
                                 Use
                               </button>
-                              <AiFillDelete
-                                className="text-2xl hover:text-red-500 hover:cursor-pointer"
-                                onClick={() =>
-                                  handleDeleteTemplate(template._id)
-                                }
-                              />
+
+                              <Tooltip title="Delete template" placement="top">
+                                <IconButton>
+                                  <AiFillDelete
+                                    className="text-2xl hover:text-red-500 hover:cursor-pointer"
+                                    onClick={() =>
+                                      handleDeleteTemplate(template._id)
+                                    }
+                                  />
+                                </IconButton>
+                              </Tooltip>
                             </div>
                           </AccordionPanel>
                         </AccordionItem>
@@ -368,7 +378,9 @@ const MailPage = () => {
                             </AccordionButton>
                           </h2>
                           <AccordionPanel pb={4}>
-                            <pre>{`${template.body}`}</pre>
+                            <div className="border border-gray-200 p-4 rounded-xl">
+                              <pre>{`${template.body}`}</pre>
+                            </div>
                             <button
                               className="bg-black  hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                               onClick={() => handleTemplateSelect(template)}
