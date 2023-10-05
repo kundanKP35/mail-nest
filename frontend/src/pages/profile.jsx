@@ -3,12 +3,15 @@ import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from '../slice/loginSlice';
 import { useUpdateProfileMutation } from "../slice/usersApiSlice";
+import UserDetails from "../components/userDetails";
 
 const Profile = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [appEmail, setAppEmail] = useState('');
+    const [emailAppPassword, setEmailAppPassword] = useState('');
 
     const dispatch = useDispatch();
 
@@ -33,6 +36,8 @@ const Profile = () => {
                     name,
                     email,
                     password,
+                    appEmail,
+                    emailAppPassword
                 }).unwrap();
                 dispatch(setCredentials({...response}));
                 toast.success('Profile Updated Successfully');
@@ -43,7 +48,8 @@ const Profile = () => {
     };
 
     return (
-        <div className="w-1/3 m-auto md:mt-6 font-poppins">
+        <div className="flex m-auto md:mt-6 font-poppins">
+            <div className="w-1/2 font-poppins">
             <h1 className="text-2xl font-bold mb-6">Update Profile</h1>
 
             <form onSubmit={submitHandler}>
@@ -91,6 +97,28 @@ const Profile = () => {
                     />
                 </div>
 
+                <div className="mb-4">
+                    <label htmlFor="appEmail" className="block text-gray-700">App Email</label>
+                    <input
+                        type="email"
+                        id="appEmail"
+                        value={appEmail}
+                        onChange={(e) => setAppEmail(e.target.value)}
+                        className="w-full border px-3 py-2 mt-1"
+                    />
+                </div>
+
+                <div className="mb-4">
+                    <label htmlFor="emailAppPassword" className="block text-gray-700">App Email Password</label>
+                    <input
+                        type="password"
+                        id="emailAppPassword"
+                        value={emailAppPassword}
+                        onChange={(e) => setEmailAppPassword(e.target.value)}
+                        className="w-full border px-3 py-2 mt-1"
+                    />
+                </div>
+
                 <button
                     type="submit"
                     className="w-full mt-4  bg-black text-white font-semibold py-2 rounded-md hover:bg-gray-900 transition-all"
@@ -99,6 +127,10 @@ const Profile = () => {
                 </button>
             </form>
             </div>
+            <div>   
+                <UserDetails />
+            </div>
+        </div>
     )
 }
 

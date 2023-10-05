@@ -5,6 +5,7 @@ import { inbox, hero, notification, joinUs } from "../assets/index";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { GoNorthStar } from "react-icons/go";
 import Footer from "../components/footer";
+import FeaturesSection from "../components/homeFeatures";
 
 const Home = () => {
   const isLoggedIn = useSelector((state) => state.login.userInfo);
@@ -89,7 +90,7 @@ const Home = () => {
       </div>
       <div className="w-full px-10 flex flex-col md:flex-row items-start font-poppins">
         <div className="flex flex-row md:w-1/2 justify-start ">
-          <div className="flex flex-col">
+          {/* <div className="flex flex-col">
             <span className="border border-gray-400 h-0 w-full my-4"></span>
             <h1 className="text-2xl font-bold font-poppins text-gray-900">
               Create your profile
@@ -103,7 +104,7 @@ const Home = () => {
             <img src={joinUs} alt="" className="h-[10rem] rounded-2xl"/>
             </div>
             <span className="border border-gray-400 h-0 w-full my-4"></span>
-          </div>
+          </div> */}
         </div>
         <div className="flex flex-row w-1/2 justify-end text-end">
           <h1 className="text-2xl  font-poppins text-gray-900">
@@ -111,6 +112,8 @@ const Home = () => {
           </h1>
         </div>
       </div>
+
+      <FeaturesSection />
       <Footer />
     </>
   );

@@ -98,7 +98,7 @@ const MailPage = () => {
 
   // Send email function
   const sendEmail = async () => {
-    const emailPassword = prompt("Enter your email password");
+    const emailPassword = prompt("Enter your app password");
     mailData.password = emailPassword;
 
     return new Promise(async (resolve, reject) => {
@@ -248,12 +248,12 @@ const MailPage = () => {
           <div className="relative">
             <div className="flex items-center justify-between gap-x-3">
               <div>
-                <button
-                  className="bg-black hover:bg-gray-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline flex flex-row items-center gap-2"
+                <div
+                  className="bg-black hover:bg-gray-900 hover:cursor-pointer text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline flex flex-row items-center gap-2"
                   onClick={handleOpenTemplate}
                 >
                   Save Template <MdOutlineBookmarkAdd />
-                </button>
+                </div>
               </div>
               <div className="flex flex-row justify-end items-center gap-3">
               <GrAttachment />
@@ -282,7 +282,7 @@ const MailPage = () => {
         />
       </div>
       <div className="flex flex-col md:w-1/2 mt-8 gap-x-2 gap-y-8">
-        <Alert status="warning" className="rounded-xl">
+        <Alert status="warning" className="rounded-xl -z-30">
           <AlertIcon />
           Since May 30, 2022, Google no longer supports less secure apps. Follow
           the link to get started with your own app password . Don't worry, it's
