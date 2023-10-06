@@ -282,7 +282,7 @@ const MailPage = () => {
         />
       </div>
       <div className="flex flex-col md:w-1/2 mt-8 gap-x-2 gap-y-8">
-        <Alert status="warning" className="rounded-xl -z-30">
+        {/* <Alert status="warning" className="rounded-xl -z-30">
           <AlertIcon />
           Since May 30, 2022, Google no longer supports less secure apps. Follow
           the link to get started with your own app password . Don't worry, it's
@@ -290,7 +290,7 @@ const MailPage = () => {
           <Link to="/instructions">
             <FiExternalLink />
           </Link>
-        </Alert>
+        </Alert> */}
         {/* userTemplates */}
         <div>
           {userTemplates && (
