@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node backend/server.js",
-    "dev": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
@@ -24,6 +24,7 @@
     "nodemailer": "^6.9.5"
   },
   "devDependencies": {
-    "concurrently": "^8.2.1"
+    "concurrently": "^8.2.1",
+    "nodemon": "^3.0.1"
   }
 }

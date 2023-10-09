@@ -6,7 +6,7 @@ import mailRoutes from "./routes/mailRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDatabase from "./config/database.js";
 import cookieParser from "cookie-parser";
-// import cors from "cors";
+import cors from "cors";
 import path from "path";
 
 dotenv.config();
@@ -21,17 +21,15 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '/frontend/dist')));
 
+if(process.env.NODE_ENV === 'production'){
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
+}
 
 
-// app.use(cors({
-
-//   credentials : true,
-//   origin : "https://mail-nest.vercel.app"
-// }
-// ));
+app.use(cors(
+));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
