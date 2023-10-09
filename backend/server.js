@@ -19,13 +19,7 @@ const __dirname = path.resolve();
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '/frontend/dist')));
 
-if(process.env.NODE_ENV === 'production'){
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
-});
-}
 
 
 app.use(cors(
@@ -49,6 +43,12 @@ app.use("/api/", mailRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, '/frontend/dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+});
+}
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
