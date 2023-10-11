@@ -19,7 +19,7 @@ import Profile from './pages/profile.jsx';
 import RegisterPage from './pages/register.jsx';
 import MailPage from './pages/mail.jsx';
 import store from './store.js';
-// import Instructions from './pages/instructions.jsx';
+import Instructions from './pages/instructions.jsx';
 
 import { ChakraProvider } from '@chakra-ui/react'
 
@@ -37,7 +37,7 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
-      {/* <Route path="/instructions" element={<Instructions />} /> */}
+      <Route path="/instructions" element={<Instructions />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<MailPage />} />

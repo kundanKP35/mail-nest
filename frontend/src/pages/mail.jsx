@@ -282,15 +282,17 @@ const MailPage = () => {
         />
       </div>
       <div className="flex flex-col md:w-1/2 mt-8 gap-x-2 gap-y-8">
-        {/* <Alert status="warning" className="rounded-xl -z-30">
+        <Link to="/instructions">
+        <Alert status="warning" className="rounded-xl -z-30">
           <AlertIcon />
           Since May 30, 2022, Google no longer supports less secure apps. Follow
           the link to get started with your own app password . Don't worry, it's
           easy and one-time setup !<br />
-          <Link to="/instructions">
+          <Link>
             <FiExternalLink />
           </Link>
-        </Alert> */}
+        </Alert>
+        </Link>
         {/* userTemplates */}
         <div>
           {userTemplates && (
