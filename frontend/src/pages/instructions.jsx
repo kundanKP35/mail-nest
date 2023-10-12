@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
-import { step1, step2, step3, step4 } from "../assets/Steps/index.js";
+import { step1, step2, step3, step4 } from "../assets/index";
 
 const steps = [
   {
