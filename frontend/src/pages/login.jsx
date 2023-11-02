@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { banner } from "../assets/index";
 import { setCredentials } from "../slice/loginSlice";
 import { useLoginMutation } from "../slice/usersApiSlice";
+import Loader from "../components/Loader/loader";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [loginApiCall, { isLoading, error }] = useLoginMutation();
+  const [loginApiCall, { isLoading }] = useLoginMutation();
 
   const { userInfo } = useSelector((state) => state.login);
 
@@ -39,14 +40,17 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-row h-[90vh] font-poppins">
+    <>
+      {isLoading ? (<Loader />) : (<div className="flex flex-row h-[90vh] font-poppins">
       <div className="w-[50%] hidden md:block px-2">
+
         <img
           src={banner}
           alt="Hero Image"
           className="w-full object-cover h-[88vh] rounded-2xl "
           style={{ margin: 0, padding: 0 }}
         />
+
       </div>
       <div className="md:w-[50%] my-auto md:px-20">
         <h2 className="text-3xl  pb-2 text-left">
@@ -111,7 +115,8 @@ const LoginPage = () => {
           </button>
         </form>
       </div>
-    </div>
+    </div>)}
+    </>
   );
 };
 

@@ -15,9 +15,9 @@ const Footer = () => {
             question an uncited claim. If your work has been tagged
           </p>
           <div className="w-44 pt-6 md:pt-0">
-            <a className="bg-red-500 justify-center text-center rounded-lg shadow px-10 py-3 flex items-center">
+            <Link to="/contact" className="bg-red-500 justify-center text-center rounded-lg shadow px-10 py-3 flex items-center">
               Contact US
-            </a>
+            </Link>
           </div>
         </div>
         <div className="flex flex-col">
@@ -35,9 +35,15 @@ const Footer = () => {
               Contact
             </Link>
             <div className="flex flex-row space-x-8 items-center justify-between">
-              <FaFacebook className="text-3xl" />
-              <FaInstagram className="text-3xl" />
-              <FaTwitter className="text-3xl" />
+              <a href="https://www.facebook.com" target="_blank">
+                  <FaFacebook className="text-3xl" />
+                </a>
+                <a href="https://www.instagram.com">                
+                  <FaInstagram className="text-3xl" />
+                </a>
+                <a href="https://www.twitter.com">             
+                  <FaTwitter className="text-3xl" />
+                </a> 
             </div>
           </div>
           <hr className="border-gray-600" />

@@ -9,7 +9,8 @@ import step1 from './Step1.png';
 import step2 from './Step2.png';
 import step3 from './Step3.png';
 import step4 from './Step4.png';
-
+import akash from './akash.png';
+import kundan from './kundan.jpeg';
 export {
     banner,
     inbox,
@@ -21,5 +22,7 @@ export {
     step1,
     step2,
     step3,
-    step4
+    step4,
+    akash,
+    kundan
 }

@@ -6,6 +6,7 @@ import { setCredentials } from "../slice/loginSlice";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { banner } from "../assets/index";
+import Loader from "../components/Loader/loader";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ const RegisterPage = () => {
 
   const { userInfo } = useSelector((state) => state.login);
 
-  const [registerApiCall, { error }] = useRegisterMutation();
+  const [registerApiCall, { error,isLoading }] = useRegisterMutation();
 
   useEffect(() => {
     if (userInfo) {
@@ -48,7 +49,8 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex flex-row h-[90vh] font-poppins">
+    <>
+      {isLoading ? (<Loader />) : (<div className="flex flex-row h-[90vh] font-poppins">
       <div className="w-[50%] hidden md:block px-2">
         <img
           src={banner}
@@ -135,7 +137,8 @@ const RegisterPage = () => {
           <span>Google</span>
         </button>
       </div>
-    </div>
+    </div>)}
+    </>
   );
 };
 

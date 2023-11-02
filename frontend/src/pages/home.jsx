@@ -26,9 +26,15 @@ const Home = () => {
             {/* left side */}
             <div className="text-gray-900 tracking-wider my-auto">
               <div className="flex items-left justify-left space-x-4 p-6 pb-8 mt-4 gap-4 ">
-                <FaFacebook className="text-4xl rounded-full bg-white p-2 hover:bg-black hover:text-white transitionall hover:cursor-pointer" />
-                <FaInstagram className="text-4xl rounded-full bg-white p-2 hover:bg-black hover:text-white transitionall hover:cursor-pointer" />
-                <FaTwitter className="text-4xl rounded-full bg-white p-2 hover:bg-black hover:text-white transitionall hover:cursor-pointer" />
+                <a href="https://www.facebook.com" target="_blank">
+                  <FaFacebook className="text-4xl rounded-full bg-white p-2 hover:bg-black hover:text-white transitionall hover:cursor-pointer" />
+                </a>
+                <a href="https://www.instagram.com">                
+                  <FaInstagram className="text-4xl rounded-full bg-white p-2 hover:bg-black hover:text-white transitionall hover:cursor-pointer" />
+                </a>
+                <a href="https://www.twitter.com">             
+                  <FaTwitter className="text-4xl rounded-full bg-white p-2 hover:bg-black hover:text-white transitionall hover:cursor-pointer" />
+                </a>   
               </div>
               <div className="items-left text-white px-6  pb-8">
                 <h1 className="text-5xl font-extrabold font-poppins my-2 leading-[3.5rem]">
@@ -86,7 +92,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      
+
 
       <FeaturesSection />
       <Footer />
