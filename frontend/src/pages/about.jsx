@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaTwitter, FaLinkedin, FaBitbucket } from "react-icons/fa";
 import { BsGithub } from "react-icons/bs";
 import { GoLinkExternal } from "react-icons/go";
+import { akash, kundan } from "../assets/index";
 
 const About = () => {
   return (
@@ -22,13 +23,14 @@ const About = () => {
           time and ensuring your messages are professional and impactful.
         </p>
         <div className="flex flex-row justify-center gap-2">
-        <Link to='/login'>
-          <button className="py-2 px-4 bg-black text-white hover:bg-white hover:text-black hover:border border-black font-bold rounded-full">
-            Get Started
-          </button>
-        </Link>
+          <Link to='/login'>
+            <button className="py-2 px-4 bg-black text-white hover:bg-white hover:text-black hover:border border-black font-bold rounded-full">
+              Get Started
+            </button>
+          </Link>
           <button className="py-2 px-4 border border-black bg-white font-bold rounded-full flex items-center gap-2 hover:bg-black hover:text-white transition-all">
             <BsGithub size={20} /> Code <GoLinkExternal size={15} />
+            <a href="https://github.com/kundanKP35/mail-nest"></a>
           </button>
         </div>
         <div className="border-t-2 border-gray-300 mt-5"></div>
@@ -42,7 +44,7 @@ const About = () => {
       <div className="flex items-center justify-center flex-wrap gap-8 p-4">
         <div className="card bg-white p-4 rounded-xl shadow-2xl w-[250px] text-center">
           <img
-            src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+            src={akash}
             alt="Contributor 1"
             className="w-24 h-24 rounded-full object-cover transition duration-200 hover:scale-110 mx-auto"
           />
@@ -50,15 +52,21 @@ const About = () => {
             Akash Parida
           </div>
           <div className="flex items-center justify-center gap-3 mt-2 w-auto h-5 text-gray-600">
-            <FaLinkedin className="cursor-pointer transition duration-200 hover:text-black" />
-            <BsGithub className="cursor-pointer transition duration-200 hover:text-black" />
-            <FaTwitter className="cursor-pointer transition duration-200 hover:text-black" />
+            <a href="https://www.linkedin.com/in/akash-parida-ap">
+              <FaLinkedin className="cursor-pointer transition duration-200 hover:text-black" />
+            </a>
+            <a href="https://github.com/akash5k">
+              <BsGithub className="cursor-pointer transition duration-200 hover:text-black" />
+            </a>
+            <a href="https://www.twitter.com">
+              <FaTwitter className="cursor-pointer transition duration-200 hover:text-black" />
+            </a>
           </div>
         </div>
 
         <div className="card bg-white p-4 rounded-xl shadow-2xl w-[250px] text-center">
           <img
-            src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"
+            src={kundan}
             alt="Contributor 2"
             className="w-24 h-24 rounded-full object-cover transition duration-200 hover:scale-110 mx-auto"
           />
@@ -66,9 +74,15 @@ const About = () => {
             Kundan Prasad
           </div>
           <div className="flex items-center justify-center gap-3 mt-2 w-auto h-5 text-gray-600">
-            <FaLinkedin className="cursor-pointer transition duration-200 hover:text-black" />
-            <BsGithub className="cursor-pointer transition duration-200 hover:text-black" />
-            <FaTwitter className="cursor-pointer transition duration-200 hover:text-black" />
+            <a href="https://www.linkedin.com/in/kundan-prasad-kp">
+              <FaLinkedin className="cursor-pointer transition duration-200 hover:text-black" />
+            </a>
+            <a href="https://github.com/kundanKP35">
+              <BsGithub className="cursor-pointer transition duration-200 hover:text-black" />
+            </a>
+            <a href="https://www.twitter.com">
+              <FaTwitter className="cursor-pointer transition duration-200 hover:text-black" />
+            </a>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 import { Alert, AlertIcon, useDisclosure } from "@chakra-ui/react";
 import { FiExternalLink } from "react-icons/fi";
 import TemplateDialog from "../components/templateDialog";
-
+import Loader from "../components/Loader/loader";
 import {
   Accordion,
   AccordionButton,
@@ -59,7 +59,7 @@ const MailPage = () => {
   const [preTemplates, setPreTemplates] = useState([]);
 
   const [getUserTemplatesApi, { error }] = useGetUserTemplatesMutation();
-  const [getAllTemplatesApi] = useGetAllTemplateMutation();
+  const [getAllTemplatesApi,{isLoading}] = useGetAllTemplateMutation();
   const [createTemplateApi] = useCreateTemplateMutation();
   const [deleteTemplateApi] = useDeleteTemplateMutation();
 
@@ -357,7 +357,7 @@ const MailPage = () => {
           )}
         </div>
         {/* preTemplates */}
-        <div>
+        {isLoading ? (<Loader />) : (<div>
           {preTemplates && (
             <div>
               <h1 className="text-2xl font-bold mb-4">Premade Templates</h1>
@@ -400,7 +400,7 @@ const MailPage = () => {
               </Accordion>
             </div>
           )}
-        </div>
+        </div>)}
       </div>
     </div>
   );
