@@ -1,5 +1,5 @@
 import React from "react";
-import { joinUs, notification } from "../assets/index";
+import { joinUs, notification, feature1, feature2, feature3 } from "../assets/index";
 
 const Feature = ({ image, heading, description }) => (
   <div className="bg-white rounded-lg shadow-sm p-4 flex flex-col items-start text-center">
@@ -25,17 +25,17 @@ const FeaturesSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Feature
-            image={joinUs}
+            image={feature1}
             heading="Template Management"
             description="Create, edit, and manage personalized email templates tailored to your needs. Maintain consistent communication effortlessly."
           />
           <Feature
-            image={joinUs}
+            image={feature2}
             heading="Pre-made Templates Library"
             description="Explore a vast library of professionally designed pre-made email templates. Choose from various categories to find the perfect template for your purpose."
           />
           <Feature
-            image={joinUs}
+            image={feature3}
             heading="Template Customization"
             description="Customize your own templates. Add dynamic content, adjust subjects, and modify layouts to align with your brand identity."
           />

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { inbox, hero, notification, joinUs } from "../assets/index";
+import { hero, notification, joinUs } from "../assets/index";
 import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa";
 import { GoNorthStar } from "react-icons/go";
 import Footer from "../components/footer";
