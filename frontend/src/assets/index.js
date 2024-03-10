@@ -1,5 +1,5 @@
 import banner from './banner.jpg';
-import inbox from './inbox.jpg'
+// import inbox from './inbox.jpg'
 import hero from './hero.jpg'
 import notification from './notification.jpg'
 import joinUs from './joinUs.jpg'
@@ -11,9 +11,11 @@ import step3 from './Step3.png';
 import step4 from './Step4.png';
 import akash from './akash.png';
 import kundan from './kundan.jpeg';
+import feature1 from './feature1.jpg';
+import feature2 from './feature2.jpg';
+import feature3 from './feature3.jpg';
 export {
     banner,
-    inbox,
     hero,
     hero2,
     notification,
@@ -24,5 +26,8 @@ export {
     step3,
     step4,
     akash,
-    kundan
+    kundan,
+    feature1,
+    feature2,
+    feature3
 }
