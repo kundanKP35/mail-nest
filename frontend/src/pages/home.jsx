@@ -25,6 +25,7 @@ const Home = () => {
             <div className="text-gray-900 tracking-wider my-auto">
               <div className="flex items-left justify-left space-x-4 p-6 pb-8 mt-4 gap-4 ">
                 <a href="https://www.facebook.com" rel="noreferrer" target="_blank">
+
                   <FaFacebook className="text-4xl rounded-full bg-white p-2 hover:bg-black hover:text-white transitionall hover:cursor-pointer" />
                 </a>
                 <a href="https://www.instagram.com">                
