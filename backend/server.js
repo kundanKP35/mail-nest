@@ -19,11 +19,7 @@ const __dirname = path.resolve();
 
 const app = express();
 
-
-
-
-app.use(cors(
-));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,12 +31,12 @@ app.use("/api/mail", templateRoutes);
 
 app.use("/api/", mailRoutes);
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, '/frontend/dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
-});
-}else{
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+  });
+} else {
   app.get("/", (req, res) => {
     res.send("Server is ready");
   });
@@ -48,7 +44,6 @@ app.get('*', (req, res) => {
 
 app.use(notFound);
 app.use(errorHandler);
-
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
